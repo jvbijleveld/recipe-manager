@@ -6,5 +6,6 @@ public enum UnitEnum {
     SPOON,
     PIECE,
     GRAMS,
-    MILILITERS
+    MILLILITRES,
+    TO_TASTE
 }

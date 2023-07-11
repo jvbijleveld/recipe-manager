@@ -56,7 +56,7 @@ public class RecipeFixture {
                 Ingredient.builder()
                         .ingredientName("Milk")
                         .amount(150)
-                        .unit(UnitEnum.MILILITERS)
+                        .unit(UnitEnum.MILLILITRES)
                         .build(),
                 Ingredient.builder()
                         .ingredientName("Egg")

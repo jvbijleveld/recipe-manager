@@ -11,12 +11,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authz) -> authz
-                        .anyRequest().authenticated()
-                );
-        return http.build();
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests()
+                .anyRequest().authenticated()
+                .and()
+                .oauth2Login()
+                .and()
+                .build();
     }
 
 }
