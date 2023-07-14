@@ -1,0 +1,53 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: "traefik:v2.4"
+    command:
+      - --entrypoints.web.address=:80
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --api=true # Don't do that in production
+      - --api.insecure=true # Don't do that in production
+      - --log.level=DEBUG
+    ports:
+      - "80:80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - recipe-manager
+
+  db:
+    image: recipe-manager-db:latest
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS:-recipe_manager}
+      TZ: ${DOCKER_TIMEZONE:-UTC}
+      DATABASE: ${DATABASE:-recipe_manager}
+      DB_PORT: 5432
+      LANG: en_US.utf8
+    command: [ "postgres", "-c", "log_min_duration_statement=${DB_LOG_MIN_DURATION_STATEMENT:--1}" ]
+    ports:
+      - 5432:5432
+    networks:
+      - recipe-manager
+
+  api:
+    image: recipe-manager:latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.rm-api.rule=Host(`recipe-manager.dev`)
+      - traefik.http.routers.rm-api.entrypoints=web
+      - traefik.http.services.rm-api.loadbalancer.server.port=8080
+      - traefik.docker.network=traefik_default
+    environment:
+      TZ: ${DOCKER_TIMEZONE:-UTC}
+      OAUTH_CLIENT_ID: ${OAUTH_CLIENT_ID:-}
+      OAUTH_CLIENT_SECRET: ${OAUTH_CLIENT_SECRET:-}
+    depends_on:
+      - db
+    networks:
+      - recipe-manager
+
+networks:
+  recipe-manager:
+    external: true

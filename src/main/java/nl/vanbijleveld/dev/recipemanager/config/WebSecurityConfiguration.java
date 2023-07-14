@@ -6,18 +6,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration {
 
+
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests()
-                .anyRequest().authenticated()
-                .and()
-                .oauth2Login()
-                .and()
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/hello").permitAll()
+                        .anyRequest().authenticated())
+                .oauth2Login(withDefaults())
                 .build();
     }
 
