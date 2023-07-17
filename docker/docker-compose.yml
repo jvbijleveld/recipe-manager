@@ -35,7 +35,7 @@ services:
     image: recipe-manager:latest
     labels:
       - traefik.enable=true
-      - traefik.http.routers.rm-api.rule=Host(`recipe-manager.dev`)
+      - traefik.http.routers.rm-api.rule=Host(`${HOSTNAME}`) && PathPrefix(`${API_PREFIX}`)
       - traefik.http.routers.rm-api.entrypoints=web
       - traefik.http.services.rm-api.loadbalancer.server.port=8080
       - traefik.docker.network=traefik_default

@@ -1,4 +1,9 @@
+server:
+  servlet:
+    context-path: ${API_PREFIX:-/api}
+
 spring:
+  application.name: api
   security:
     oauth2:
       client:
@@ -28,3 +33,7 @@ spring:
       url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/recipe_manager?useSSL=false&gssEncMode=disable
       user: ${DB_FLYWAY_USERNAME:db_user}
       password: ${DB_FLYWAY_PASSWORD:db_pass}
+
+logging:
+  level:
+    root: ${DEBUG_LEVEL:INFO}

@@ -38,4 +38,4 @@ build/
 dependency-reduced-pom.xml
 
 mem*.db
-/deploy-stack.sh
+/scripts/*
