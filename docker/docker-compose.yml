@@ -26,6 +26,8 @@ services:
       DB_PORT: 5432
       LANG: en_US.utf8
     command: [ "postgres", "-c", "log_min_duration_statement=${DB_LOG_MIN_DURATION_STATEMENT:--1}" ]
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:

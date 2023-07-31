@@ -39,3 +39,4 @@ dependency-reduced-pom.xml
 
 mem*.db
 /scripts/*
+/docker/postgres-data/
