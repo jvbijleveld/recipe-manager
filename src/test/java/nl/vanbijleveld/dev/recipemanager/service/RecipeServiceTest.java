@@ -30,12 +30,12 @@ class RecipeServiceTest {
         var mockRecipe = mockRecipe(3L);
         when(recipeDao.findById(3L)).thenReturn(ofNullable(mockRecipe));
 
-        assertEquals(recipeService.findRecipe(3L), mockRecipe);
+        assertEquals(recipeService.getRecipeById(3L), mockRecipe);
     }
 
     @Test
     void testFindRecipe_notFound() {
-        assertThrows(ResourceNotFoundException.class, () -> recipeService.findRecipe(3L));
+        assertThrows(ResourceNotFoundException.class, () -> recipeService.getRecipeById(3L));
     }
 
 }

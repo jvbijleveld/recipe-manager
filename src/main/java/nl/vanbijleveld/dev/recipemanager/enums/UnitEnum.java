@@ -7,5 +7,6 @@ public enum UnitEnum {
     PIECE,
     GRAMS,
     MILLILITRES,
+    CM,
     TO_TASTE
 }

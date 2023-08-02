@@ -25,6 +25,9 @@ public class Recipe {
     @JoinColumn(name = "recipe", referencedColumnName = "id", nullable = false)
     private List<Instruction> instructions;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "serves")
     private Integer serves;
 

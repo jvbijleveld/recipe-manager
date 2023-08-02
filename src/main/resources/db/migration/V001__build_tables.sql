@@ -2,7 +2,10 @@
 CREATE TABLE recipe_schema.recipe (
     id serial primary key,
     name varchar(128) not null,
-    serves int
+    description text,
+    serves int,
+    created_by varchar(128),
+    created_at timestamp
 );
 CREATE UNIQUE INDEX recipe_uidx ON recipe_schema.recipe(name);
 
@@ -13,7 +16,8 @@ CREATE TABLE recipe_schema.instruction (
     step int not null,
     action varchar(32),
     description varchar(512),
-    duration bigint
+    duration bigint,
+    appliance varchar(128)
 );
 ALTER TABLE recipe_schema.instruction ADD CONSTRAINT instruction_recipe_fk1 FOREIGN KEY (recipe) REFERENCES recipe_schema.recipe (id);
 CREATE INDEX instruction_recipe_idx ON recipe_schema.instruction(recipe);

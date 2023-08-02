@@ -36,4 +36,7 @@ public class Instruction {
     @Column(name = "duration")
     private Integer duration;
 
+    @Column(name = "appliance")
+    private String appliance;
+
 }

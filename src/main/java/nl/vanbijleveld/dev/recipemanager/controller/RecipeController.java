@@ -7,15 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
 
+    @GetMapping(value = "/recipe")
+    public List<Recipe> getAllRecipes() {
+        return recipeService.findAllRecipes();
+    }
+
     @GetMapping(value = "/recipe/{recipeId}")
     public Recipe getRecipe(@PathVariable Long recipeId) {
-        return recipeService.findRecipe(recipeId);
+        return recipeService.getRecipeById(recipeId);
     }
 
 }
