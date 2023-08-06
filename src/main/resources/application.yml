@@ -6,11 +6,9 @@ spring:
   application.name: api
   security:
     oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${OAUTH_CLIENT_ID:-}
-            client-secret: ${OAUTH_CLIENT_SECRET:-}
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
 
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/recipe_manager?useSSL=false&gssEncMode=disable

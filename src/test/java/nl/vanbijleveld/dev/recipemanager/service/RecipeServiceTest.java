@@ -1,6 +1,6 @@
 package nl.vanbijleveld.dev.recipemanager.service;
 
-import nl.vanbijleveld.dev.recipemanager.dao.RecipeDao;
+import nl.vanbijleveld.dev.recipemanager.dao.RecipeRepository;
 import nl.vanbijleveld.dev.recipemanager.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 class RecipeServiceTest {
 
     @Mock
-    private RecipeDao recipeDao;
+    private RecipeRepository recipeRepository;
 
     @InjectMocks
     private RecipeService recipeService;
@@ -28,7 +28,7 @@ class RecipeServiceTest {
     @Test
     void testFindRecipe_ok() {
         var mockRecipe = mockRecipe(3L);
-        when(recipeDao.findById(3L)).thenReturn(ofNullable(mockRecipe));
+        when(recipeRepository.findById(3L)).thenReturn(ofNullable(mockRecipe));
 
         assertEquals(recipeService.getRecipeById(3L), mockRecipe);
     }

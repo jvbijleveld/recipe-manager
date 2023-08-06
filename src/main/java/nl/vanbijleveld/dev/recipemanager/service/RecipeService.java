@@ -1,27 +1,25 @@
 package nl.vanbijleveld.dev.recipemanager.service;
 
-import nl.vanbijleveld.dev.recipemanager.dao.RecipeDao;
+import lombok.AllArgsConstructor;
+import nl.vanbijleveld.dev.recipemanager.dao.RecipeRepository;
 import nl.vanbijleveld.dev.recipemanager.entity.Recipe;
 import nl.vanbijleveld.dev.recipemanager.exceptions.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
+@AllArgsConstructor
 public class RecipeService {
 
-    @Autowired
-    private RecipeDao recipeDao;
+    private final RecipeRepository recipeRepository;
 
     public List<Recipe> findAllRecipes() {
-        return StreamSupport.stream(recipeDao.findAll().spliterator(), false).toList();
+        return recipeRepository.findAll().stream().toList();
     }
 
     public Recipe getRecipeById(Long recipeId) {
-        return recipeDao.findById(recipeId).orElseThrow(ResourceNotFoundException::new);
+        return recipeRepository.findById(recipeId).orElseThrow(ResourceNotFoundException::new);
     }
 
 }
