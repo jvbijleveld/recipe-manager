@@ -16,6 +16,7 @@ import java.util.List;
 public class Instruction {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -29,7 +30,7 @@ public class Instruction {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "instruction", referencedColumnName = "id", nullable = false)
     private List<Ingredient> ingredients;
 

@@ -14,6 +14,7 @@ import nl.vanbijleveld.dev.recipemanager.enums.UnitEnum;
 public class Ingredient {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
